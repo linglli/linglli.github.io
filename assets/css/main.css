@@ -107,14 +107,14 @@ pre {
   max-width: calc(800px - (30px * 2));
   margin-right: auto;
   margin-left: auto;
-  padding-right: 30px;
-  padding-left: 30px; }
+  padding: 10px 30px 30px 30px;
+   }
   @media screen and (max-width: 800px) {
     .wrapper {
       max-width: -webkit-calc(800px - (30px));
       max-width: calc(800px - (30px));
-      padding-right: 15px;
-      padding-left: 15px; } }
+      padding: 10px 30px 30px 30px;
+      } }
 
 /**
  * Clearfix
@@ -249,9 +249,6 @@ pre {
 /**
  * Page content
  */
-.page-content {
-  padding: 30px 0; }
-
 .page-heading {
   font-size: 20px; }
 
