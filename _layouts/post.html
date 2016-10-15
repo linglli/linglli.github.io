@@ -42,7 +42,11 @@
         </div>
     </header>
     <div class="wrapper">
-    {{content }}
+        <div class="post-header">
+    	    <h2>{{page.title}}</h2>
+    	    <span class="post-meta">{{page.date}}</span>
+        </div>
+    	{{content }}
     </div>
     <footer class="site-footer">
         <div class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a>

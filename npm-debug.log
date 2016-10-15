@@ -1,0 +1,65 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'yo' ]
+2 info using npm@2.15.9
+3 info using node@v4.6.0
+4 verbose install initial load of /usr/local/lib/package.json
+5 verbose readDependencies loading dependencies from /usr/local/lib/package.json
+6 silly cache add args [ 'yo', null ]
+7 verbose cache add spec yo
+8 silly cache add parsed spec Result {
+8 silly cache add   raw: 'yo',
+8 silly cache add   scope: null,
+8 silly cache add   name: 'yo',
+8 silly cache add   rawSpec: '',
+8 silly cache add   spec: 'latest',
+8 silly cache add   type: 'tag' }
+9 silly addNamed yo@latest
+10 verbose addNamed "latest" is being treated as a dist-tag for yo
+11 info addNameTag [ 'yo', 'latest' ]
+12 silly mapToRegistry name yo
+13 silly mapToRegistry using default registry
+14 silly mapToRegistry registry https://registry.npmjs.org/
+15 silly mapToRegistry data Result {
+15 silly mapToRegistry   raw: 'yo',
+15 silly mapToRegistry   scope: null,
+15 silly mapToRegistry   name: 'yo',
+15 silly mapToRegistry   rawSpec: '',
+15 silly mapToRegistry   spec: 'latest',
+15 silly mapToRegistry   type: 'tag' }
+16 silly mapToRegistry uri https://registry.npmjs.org/yo
+17 verbose addNameTag registry:https://registry.npmjs.org/yo not in flight; fetching
+18 verbose request uri https://registry.npmjs.org/yo
+19 verbose request no auth needed
+20 info attempt registry request try #1 at 11:04:04 AM
+21 verbose request id 0559a3c6f3c2b1dd
+22 http request GET https://registry.npmjs.org/yo
+23 info retry will retry, error on last attempt: Error: connect ENETUNREACH 151.101.72.162:443
+24 info attempt registry request try #2 at 11:05:30 AM
+25 http request GET https://registry.npmjs.org/yo
+26 info retry will retry, error on last attempt: Error: connect ENETUNREACH 151.101.72.162:443
+27 info attempt registry request try #3 at 11:07:45 AM
+28 http request GET https://registry.npmjs.org/yo
+29 verbose stack Error: connect ETIMEDOUT 151.101.72.162:443
+29 verbose stack     at Object.exports._errnoException (util.js:907:11)
+29 verbose stack     at exports._exceptionWithHostPort (util.js:930:20)
+29 verbose stack     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1077:14)
+30 verbose cwd /Users/liling/Documents/development/git/linglli.github.io
+31 error Darwin 15.4.0
+32 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "yo"
+33 error node v4.6.0
+34 error npm  v2.15.9
+35 error code ETIMEDOUT
+36 error errno ETIMEDOUT
+37 error syscall connect
+38 error network connect ETIMEDOUT 151.101.72.162:443
+38 error network This is most likely not a problem with npm itself
+38 error network and is related to network connectivity.
+38 error network In most cases you are behind a proxy or have bad network settings.
+38 error network
+38 error network If you are behind a proxy, please make sure that the
+38 error network 'proxy' config is set properly.  See: 'npm help config'
+39 verbose exit [ 1, true ]

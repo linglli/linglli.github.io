@@ -5,19 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{site.title}}</title>
-    <meta name="description" content="{{site.description}}">
+    <title>Daisy Blog</title>
+    <meta name="description" content="Technical blog
+">
 
     <link rel="stylesheet" href="/assets/main.css">
     <link rel="stylesheet" href="/assets/index.css">
     <link rel="canonical" href="/">
-    <link rel="alternate" type="application/rss+xml" title="{{site.title}}" href="/feed.xml">
+    <link rel="alternate" type="application/rss+xml" title="Daisy Blog" href="/feed.xml">
     <script type="text/javascript" src="/assets/js/jquery-3.1.1.slim.min.js"></script>
 </head>
 <body>
     <header class="site-header" role="banner">
         <div class="wrapper">
-        <h1 class="site-title"><a href="/">{{site.title}}</a></h1>
+        <h1 class="site-title"><a href="/">Daisy Blog</a></h1>
         <nav class="site-nav">
             <ul class="nav-list">
                     <li><a href="/">Home</a></li>
@@ -42,7 +43,33 @@
         </div>
     </header>
     <div class="wrapper">
-    {{content }}
+    <main class="page-content" aria-label="Content">
+    <div class="home">
+        <h2 class="page-heading">Posts about Java</h2>
+        <ul class="post-list">
+            
+            
+            <li>
+                <h3><a class="post-link" href="/2016/10/14/HashMap-and-HashTable.html">HashMap and HashTable!</a></h3>
+                <span class="post-meta">2016-10-14 21:19:46 +0800</span>
+                <div class="summary"><p><p>一、HashMap and HashTable
+Difference
+1.Synchronization(Thread Safe)
+当不需要多线程任务操作，可以选择HashMap, 效率高；
+HashTable是线程安全，同步的</p>
+
+<a href="/2016/10/14/HashMap-and-HashTable.html">...</a></p></div>
+            </li>
+            
+            
+            
+            
+            
+            
+        </ul>
+    </div>
+</main>
+
     </div>
     <footer class="site-footer">
         <div class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a>
