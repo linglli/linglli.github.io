@@ -99,3 +99,10 @@ h1 {
     text-align: center;
     color: #b3b3b1;
  }
+
+ /**
+  * about page
+  */
+.icon icon--github {
+    font-size: 25px;
+}

@@ -1,0 +1,21 @@
+---
+layout: default
+---
+<div class="home">
+    {% if page.title %}
+        <h2 class="page-heading">Posts about {{ page.title }}</h2>
+    {% else %}
+        <h2 class="page-heading">All Posts</h2>
+    {% endif %}
+    <ul class="post-list">
+        {% for post in site.posts %}
+            {% if page.title and post.tag == page.title %}
+                {% include post-list.html %}
+            {% endif %}
+            {% if page.title == null %}
+                {% include post-list.html %}
+            {% endif %}
+        {% endfor%}
+    </ul>
+    {{ content }}
+</div>
