@@ -6,8 +6,7 @@ date:   2016-10-13 21:19:46 +0800
 categories:
 tag: java
 ---
-一、HashMap and HashTable
-Difference
+一、HashMap and HashTable Difference
 1.Synchronization(Thread Safe)
 当不需要多线程任务操作，可以选择HashMap, 效率高；
 HashTable是线程安全，同步的
@@ -47,11 +46,15 @@ hasNext, next, remove,  forEachRemaining(jdk1.8)
 (allow remove, friendly method name)
 Enumeration is an interface
 hasMoreElement, nextElement
+{% highlight ruby %}
 for(int i = 0; i < v.size(); i++) vs while(v.hasNext() || v.hasMoreElements())
+{% endhighlight %}
 --前者需要更多的操作
 iterator on hashmap
+{% highlight ruby %}
 Iterator iter = hashmap.entrySet().iterator(); //效率高
 iterator iter = hashmap.keySet().iterator();   //先取entryset, 再按key取keySet
+{% endhighlight %}
 foreach vs while
 在foreach中删除元素，会有异常（jdk1.5以后引入）
 
