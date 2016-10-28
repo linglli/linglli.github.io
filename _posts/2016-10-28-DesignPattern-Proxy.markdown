@@ -52,8 +52,8 @@ JDK5之后，RMI和动态代理搭配使用，动态产生Stub(Proxy实例)
 handler决定如何处理这个请求，可通过method.invoke(realSubject, args)把请求转发给被代理对象，或者进一步处理<br/>
 
 <br/>
-动态代理，利用动态编译＋反射技术，把对实际对象的方法调用转换成对传入的InvocationHandler接口实现类的invoke方法调用<br/>
-```
+动态代理，利用动态编译＋反射技术，把对实际对象的方法调用转换成对传入的InvocationHandler接口实现类的invoke方法调用
+{% highlight ruby %}
 public class MyInvocationHandler implements InvocationHandler { 
 	SubInterface sub; 
 	public MyInvocationHandler(SubInterface sub) { this.sub = sub; }
@@ -63,11 +63,11 @@ SubInterface sub = new SubInterfaceImpl();
 SubInterface proxy = (SubInterface)Proxy.newProxyInstance(sub.getClass().getClassLoader(), // 动态加载					
 				sub.getClass().getInterfaces(),  // 只能代理实现了接口的类
 				new MyInvocationHandler(sub));
-```														  
+{% endhighlight %}														  
 <br/>
 <br/>
-还可以利用第三方库CGLIB实现动态代理<br/>
-```
+还可以利用第三方库CGLIB实现动态代理
+{% highlight ruby %}
 public class CglibProxy implements MethodInterceptor {
 	private Enhancer enhancer = new Enhancer();
 	public Object getProxy(Class cla) {
@@ -83,7 +83,7 @@ public class CglibProxy implements MethodInterceptor {
 }
 CglibProxy proxy = new CglibProxy();
 SubInterface proxy = (SubInterface) proxy.getProxy(SubInterface.class);
-```
+{% endhighlight %}
 <br/>
 JDK动态代理：只能代理实现了接口的类<br/>
 CGLIB：针对类来实现代理; 对指定目标类产生一个子类，通过方法拦截技术拦截所有父类方法的调用<br/>
