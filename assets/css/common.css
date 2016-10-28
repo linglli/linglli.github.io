@@ -5,8 +5,7 @@ body, h1, h2, h3, h4, h5, h6,
 p, blockquote, pre, hr,
 dl, dd, ol, ul, figure {
   margin: 0;
-  padding: 0; 
-  }
+  padding: 0; }
 
 /**
  * Basic styling
@@ -21,6 +20,17 @@ body {
   -o-font-feature-settings: "kern" 1;
   font-feature-settings: "kern" 1;
   font-kerning: normal; }
+
+/**
+ * Set `margin-bottom` to maintain vertical rhythm
+ */
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+ul, ol, dl, figure,
+.highlight {
+  margin-bottom: 5px; 
+  margin-top: 10px;
+  }
 
 /**
  * Images
@@ -51,7 +61,7 @@ li > ol {
 /**
  * Headings
  */
-h1, h2 {
+h2 {
 	font-size: 20px;
 }
 
@@ -117,14 +127,14 @@ pre {
   max-width: calc(800px - (30px * 2));
   margin-right: auto;
   margin-left: auto;
-  padding: 10px 30px 30px 30px;
-   }
+  padding-right: 30px;
+  padding-left: 30px; }
   @media screen and (max-width: 800px) {
     .wrapper {
       max-width: -webkit-calc(800px - (30px));
       max-width: calc(800px - (30px));
-      padding: 10px 30px 30px 30px;
-      } }
+      padding-right: 15px;
+      padding-left: 15px; } }
 
 /**
  * Clearfix
@@ -259,6 +269,9 @@ pre {
 /**
  * Page content
  */
+.page-content {
+  padding: 30px 0; }
+
 .page-heading {
   font-size: 20px; }
 
