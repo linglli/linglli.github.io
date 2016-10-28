@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Daisy Blog</title>
+    <link rel="stylesheet" href="/assets/main.css">
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <link rel="alternate" type="application/rss+xml" title="Daisy Blog" href="/feed.xml">
+    <script type="text/javascript" src="/assets/js/jquery-3.1.1.slim.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.nav-list li').hover(
+            function() {
+                $(this).find('.sub-menu').css('display', 'block');
+            },
+            function() {
+                $(this).find('.sub-menu').css('display', 'none');
+            }
+        );
+    });
+</script>
+</head>
+    <body>
+        <header class="site-header" role="banner">
+    <div class="wrapper">
+        <h1 class="site-title"><a href="/"><img src="/assets/image/portrait.jpg" alt="portrait"></a></h1>
+        <nav class="site-nav">
+            <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/nav/project">Project</a></li>
+                    <li><a href="/nav/technology">Technology</a>
+                        <ul class="sub-menu">
+                            <li><a href="/nav/java">Java</a></li>
+                            <li><a href="/nav/designpattern">DesignPattern</a></li>
+                            <li><a href="/nav/algorithm">Algorithm</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/nav/life">Life</a>
+                        <ul class="sub-menu">
+                            <li><a href="/nav/reading">Reading</a></li>
+                            <li><a href="/nav/food">Food</a></li>
+                            <li><a href="/nav/journal">Journal</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Archive</a></li>
+                    <li><a href="/nav/about">About</a></li>
+                </ul>
+        </nav>
+    </div>
+</header>
+        <div class="wrapper">
+            <div class="post-header">
+    <h2>代理模式</h2>
+    <span class="post-meta">2016-10-28 00:00:00 +0800</span>
+</div>
+<h3 id="section">定义</h3>
+<p>是指为另一个对象提供一个替身或占位符以控制对这个对象的访问。一般来说，代理和被代理对象需要实现同一个接口。</p>
+
+<p><br /></p>
+
+<h3 id="section-1">分类</h3>
+<h4 id="section-2">1.远程代理</h4>
+<p>(意思是控制对远程对象的访问)<br />
+当本地代理对象需要调用不在同一个JVM内的对象<br />
+它的流程如下：<br /></p>
+<ul>
+  <li>客户对象－－远程方法调用－－&gt;客户辅助对象(Stub)－－(网络)－－&gt;服务辅助对象(Skeleton)－－&gt;服务对象</li>
+  <li>客户对象需要调用某服务，自以为是直接向服务对象调取</li>
+  <li>实际是客户辅助对象假装成服务对象，并向服务器堆发送请求</li>
+  <li>服务辅助对象从客户辅助对象取得请求，对它解包，调用真正服务对象</li>
+  <li>服务对象处理真正的逻辑，把结果返回给服务辅助对象</li>
+  <li>服务辅助对象把调用结果打包返回给客户辅助对象</li>
+  <li>客户辅助对象把返回结果解包，返回给客户对象</li>
+</ul>
+
+<p><br />
+在Java中，可以利用RMI(Remote Method Invoke)，为客户辅助对象创建和服务对象相同的服务方法
+提供网络或IO代码和查找服务<br />
+实现步骤：<br /></p>
+<ul>
+  <li>Step1: 制作远程接口，客户辅助对象和服务对象必须实现远程接口<br /></li>
+  <li>Step2: 制作远程实现，并注册此服务，RMI实际把stub放到registry中<br />
+  <code class="highlighter-rouge">Naming.rebind("ServiceName", serviceImplObj)</code></li>
+  <li>Step3: 产生Stub和Skeleton对象<br />
+  <code class="highlighter-rouge">rmic MyRemoteServiceImpl</code></li>
+  <li>Step4: 执行remiregistry, 确保注册服务运行，否则客户无法查找相关服务<br /></li>
+  <li>Step5: 启动服务<br />
+  <code class="highlighter-rouge">java MyRemoteServiceImpl</code></li>
+  <li>Step6: 客户到RMI registry查找远程服务Stub对象，调用Stub对象的方法<br /></li>
+</ul>
+
+<p><br />
+JDK5之后，RMI和动态代理搭配使用，动态产生Stub(Proxy实例)</p>
+
+<p><br /></p>
+<h4 id="section-3">2.虚拟代理</h4>
+<p>定义：直到我们真正需要一个对象的时候才创建它，一般用在需要创建开销大的对象</p>
+
+<p><br /></p>
+<h4 id="section-4">3.保护代理</h4>
+<p>只提供给客户部分接口，根据客户的角色决定是否允许客户访问特定的方法，适用于需要安全控制的对象<br />
+利用Java动态代理创建保护代理(运行时，通过Proxy.newProxyInstance方法才把代理类创建出来)<br />
+提供InvocationHandler, 由Java产生Proxy上的任何方法调用都会被传入此类，控制对被代理对象方法的访问。<br />
+handler决定如何处理这个请求，可通过method.invoke(realSubject, args)把请求转发给被代理对象，或者进一步处理<br /></p>
+
+<p><br />
+动态代理，利用动态编译＋反射技术，把对实际对象的方法调用转换成对传入的InvocationHandler接口实现类的invoke方法调用<br /></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>public class MyInvocationHandler implements InvocationHandler { 
+	SubInterface sub; 
+	public MyInvocationHandler(SubInterface sub) { this.sub = sub; }
+	public Object invoke(Object proxy, Method method, Object[] args) throws IllegalAccessException {...}
+}
+SubInterface sub = new SubInterfaceImpl();
+SubInterface proxy = (SubInterface)Proxy.newProxyInstance(sub.getClass().getClassLoader(), // 动态加载					
+				sub.getClass().getInterfaces(),  // 只能代理实现了接口的类
+				new MyInvocationHandler(sub));
+</code></pre>
+</div>
+<p><br />
+<br />
+还可以利用第三方库CGLIB实现动态代理<br /></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>public class CglibProxy implements MethodInterceptor {
+	private Enhancer enhancer = new Enhancer();
+	public Object getProxy(Class cla) {
+		enhancer.setSuperClass(cla);
+		enhancer.setCallback(this);		
+		return enhancer.create();
+	}
+	// 拦截所有目标类方法的调用
+	@Override
+	public Object intercept(Object obj, Method m, Object[] args, MethodProxy proxy) throws Throwable {
+		proxy.invokeSuper(obj, args); // 代理类调用父类的方法
+	}
+}
+CglibProxy proxy = new CglibProxy();
+SubInterface proxy = (SubInterface) proxy.getProxy(SubInterface.class);
+</code></pre>
+</div>
+<p><br />
+JDK动态代理：只能代理实现了接口的类<br />
+CGLIB：针对类来实现代理; 对指定目标类产生一个子类，通过方法拦截技术拦截所有父类方法的调用<br /></p>
+
+<p><br />
+常见应用利动态代理的地方：<br /></p>
+<ul>
+  <li>添加调用日志</li>
+  <li>事务控制</li>
+  <li>spring aop</li>
+  <li>Java标准库的RMI</li>
+</ul>
+
+<p><br /></p>
+<h4 id="section-5">4.其它变体的代理</h4>
+<ul>
+  <li>防火墙代理：控制网络资源的访问，保护被代理者免于侵害；常用于公司的防火墙系统。<br /></li>
+  <li>智能引用代理：当被代理者被引用时，进行额外的动作；例如计算一个对象被引用的次数。<br /></li>
+  <li>缓存代理：为开销大的运算结果提供暂时存储，也允许多个用户共享结果，减少计算或网络延迟；常用于Web服务器代理，以及内容管理和出版系统。<br /></li>
+  <li>同步代理：在多线程的情况下为被代理者提供安全的访问；常用于Javaspaces，为分散式环境内的潜在对象集合提供同步访问控制。<br /></li>
+  <li>复杂隐藏代理：用来隐藏一个类的复杂集合的复杂度，并进行访问控制，类似外观代理。<br /></li>
+  <li>写入时复制代理；用来控制对象的复制，方法是延迟对象的复制，直到用户真的需要为止；例如JDK5的CopyOnWriteArrayList</li>
+</ul>
+
+<p><br /></p>
+<h3 id="section-6">代理和其它模式比较</h3>
+<p>代理和装饰者模式的区别<br /></p>
+<ul>
+  <li>装饰者为对象添加行为，不会实例化对象</li>
+  <li>代理是控制对象的访问，会创建对象</li>
+</ul>
+
+<p><br />
+代理和适配器模式的区别<br /></p>
+<ul>
+  <li>适配器会改变对象适配的接口</li>
+  <li>代理实现相同的接口<br /><br /></li>
+</ul>
+
+        </div>
+        
+<div class="duoshuo-comment">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="/designpattern/2016/10/28/DesignPattern-Proxy" data-title="代理模式" data-url="http://localhost:4000/designpattern/2016/10/28/DesignPattern-Proxy.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"testjekyll"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+<footer class="site-footer">
+    <div class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a>
+        <span>&nbsp;&nbsp;&nbsp;Copyright &copy; Daisy</span>
+    </div>
+</footer>
+    </body>
+</html>

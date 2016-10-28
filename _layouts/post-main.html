@@ -8,14 +8,18 @@ layout: default
         <h2 class="page-heading">All Posts</h2>
     {% endif %}
     <ul class="post-list">
-        {% for post in site.posts %}
-            {% if page.title and post.tag == page.title %}
-                {% include post-list.html %}
-            {% endif %}
-            {% if page.title == null %}
-                {% include post-list.html %}
-            {% endif %}
-        {% endfor%}
+    	<!-- index page -->
+    	{% if page.title == null %}
+    		{% for post in site.posts %}
+            	{% include post-list.html %}
+            {% endfor%}
+        {% else %} <!-- posts page -->
+        	{% for post in site.posts %}
+    			{% if post.tag == page.title %}
+                	{% include post-list.html %}
+            	{% endif %}
+    		{% endfor%}
+        {% endif %}
     </ul>
     {{ content }}
 </div>
