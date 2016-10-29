@@ -34,7 +34,7 @@ tag: designpattern
 	`java MyRemoteServiceImpl`
 - Step6: 客户到RMI registry查找远程服务Stub对象，调用Stub对象的方法<br/>
 
-JDK5之后，RMI和动态代理搭配使用，动态产生Stub(Proxy实例)
+JDK5之后，RMI和动态代理搭配使用，动态产生Stub(是个Proxy实例)
 
 ####  2.虚拟代理 ####
 定义：直到我们真正需要一个对象的时候才创建它，一般用在需要创建开销大的对象
